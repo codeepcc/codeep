@@ -1,16 +1,22 @@
 name: Publish to PyPI
 
 on:
+  push:
+    tags:
+      - 'v*.*.*'
   release:
-    types: [published]
+    types: [published] 
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: pypi # <-- 对应您填写的环境名
+    environment: pypi
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
