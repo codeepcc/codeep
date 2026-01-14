@@ -5,7 +5,10 @@ on:
     tags:
       - 'v*.*.*'
   release:
-    types: [published] 
+    types: [published]
+
+permissions:
+  id-token: write
 
 jobs:
   deploy:
