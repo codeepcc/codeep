@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "codeep"
-version = "0.1.1"
+version = "0.1.2"
 description = "A Python package for codeep upgrade optimization"
 readme = "README.md"
 authors = [{name = "Codeep Team", email = "andyxiaolei@gmail.com"}]
