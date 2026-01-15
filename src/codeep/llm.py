@@ -1,24 +1,26 @@
 """LangChain compatible LLM implementation for Codeep AI"""
 
-from typing import Any, Dict, Iterator, List, Optional
+from typing import Any, Dict, Iterator, List, Optional, Union
 from langchain_core.callbacks.manager import CallbackManagerForLLMRun
 from langchain_core.language_models.llms import LLM
 from langchain_core.outputs import Generation, GenerationChunk, LLMResult
-from pydantic import Field, validator
+from pydantic import Field, field_validator
 
 from .tasks import TaskClient
+from .exceptions import TaskError
 
 
 class CodeepLLM(LLM):
     """LangChain compatible LLM for Codeep AI"""
 
-    client: TaskClient = Field(...)
+    client: Union[TaskClient, Any] = Field(...)
     model_name: str = Field(default="codeep-ai")
     toolset: Optional[List[str]] = Field(default=None)
     timeout: int = Field(default=300)
     poll_interval: int = Field(default=5)
 
-    @validator("client", pre=True, always=True)
+    @field_validator("client", mode="before")
+    @classmethod
     def validate_environment(cls, v):
         """Validate that task client is provided"""
         if v is None:
@@ -50,10 +52,10 @@ class CodeepLLM(LLM):
 
         if completed_task.status == "failed":
             error_msg = completed_task.error_message or "Task failed"
-            raise RuntimeError(f"Codeep AI task failed: {error_msg}")
+            raise TaskError(f"Codeep AI task failed: {error_msg}")
 
         if completed_task.result is None:
-            raise RuntimeError("Task completed but no result returned")
+            raise TaskError("Task completed but no result returned")
 
         # Handle stop sequences
         if stop:

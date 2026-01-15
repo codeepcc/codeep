@@ -94,5 +94,29 @@ def main():
     #     print(f"Error: {completed_task.error_message}")
     """)
 
+    # Example 6: Health check
+    print("\n=== Health Check ===")
+    print("""
+    # Check API health
+    # health = client.health_check()
+    # print(f"Status: {health['status']}")
+    """)
+
+    # Example 7: Error handling
+    print("\n=== Error Handling ===")
+    print("""
+    from codeep import AuthenticationError, TaskError, QuotaExceededError
+
+    try:
+        # Your code here
+        pass
+    except AuthenticationError as e:
+        print(f"Authentication failed: {e}")
+    except QuotaExceededError as e:
+        print(f"Quota exceeded: {e}")
+    except TaskError as e:
+        print(f"Task failed: {e}")
+    """)
+
 if __name__ == "__main__":
     main()

@@ -4,11 +4,12 @@ A Python SDK for the Codeep AI REST API with full LangChain compatibility.
 
 ## Features
 
-- **Complete API Coverage**: Supports all Codeep AI API endpoints
+- **Complete API Coverage**: Supports all Codeep AI API endpoints including health checks
 - **LangChain Compatible**: Implements `BaseLLM` for seamless LangChain integration
 - **Type Safety**: Full type hints and Pydantic models
+- **Comprehensive Error Handling**: Custom exceptions for different error conditions
 - **Async Ready**: Built on requests with session management
-- **Comprehensive**: Authentication, task management, quota tracking, analytics
+- **Comprehensive**: Authentication, task management, quota tracking, analytics, and dashboard
 
 ## Installation
 

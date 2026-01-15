@@ -110,3 +110,10 @@ class CodeepClient:
         response = self.auth.session.get(url, params=params)
         response.raise_for_status()
         return response.json()
+
+    def health_check(self) -> Dict:
+        """Check API health status"""
+        url = f"{self.base_url}/health"
+        response = self.auth.session.get(url)
+        response.raise_for_status()
+        return response.json()

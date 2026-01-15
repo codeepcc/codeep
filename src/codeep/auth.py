@@ -4,6 +4,14 @@ import requests
 from typing import Dict, Optional
 from pydantic import BaseModel
 from .config import Config
+from .exceptions import (
+    AuthenticationError,
+    AuthorizationError,
+    QuotaExceededError,
+    APIError,
+    NetworkError,
+    ValidationError,
+)
 
 
 class User(BaseModel):

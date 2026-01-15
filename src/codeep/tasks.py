@@ -5,6 +5,14 @@ from typing import Dict, List, Optional, Any
 from pydantic import BaseModel
 import requests
 from .config import Config
+from .exceptions import (
+    TaskError,
+    TaskTimeoutError,
+    APIError,
+    NetworkError,
+    ValidationError,
+    AuthorizationError,
+)
 
 
 class Task(BaseModel):
@@ -86,7 +94,7 @@ class TaskClient:
             if task.status in ["completed", "failed"]:
                 return task
             time.sleep(poll_interval)
-        raise TimeoutError(f"Task {task_id} did not complete within {timeout} seconds")
+        raise TaskTimeoutError(f"Task {task_id} did not complete within {timeout} seconds")
 
     def get_queue_status(self) -> Dict:
         """Get current queue statistics"""
